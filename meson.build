@@ -35,11 +35,6 @@ source_root = meson.current_source_dir()
 
 po_dir = source_root / 'po'
 
-intltool_merge = find_program('intltool-merge')
-intltool_cache = po_dir / '.intltool-merge-cache'
-intltool_desktop_cmd = [intltool_merge, '-d', '-u', '-c', intltool_cache, po_dir, '@INPUT@', '@OUTPUT@']
-intltool_xml_cmd = [intltool_merge, '-x', '-u', '-c', intltool_cache, po_dir, '@INPUT@', '@OUTPUT@']
-
 top_inc = include_directories('.')
 
 cc = meson.get_compiler('c')
@@ -170,11 +165,11 @@ if enable_nautilus_extension
 
   appdata = gt_iface_name + '.Nautilus.metainfo.xml'
 
-  custom_target(
+  i18n.merge_file(
     appdata,
     input: appdata + '.in',
     output: '@BASENAME@',
-    command: intltool_xml_cmd,
+    po_dir: po_dir,
     install: true,
     install_dir: gt_datadir / 'metainfo',
   )
@@ -196,22 +191,23 @@ desktop_in = configure_file(
   configuration: desktop_conf,
 )
 
-custom_target(
+i18n.merge_file(
   desktop,
+  type: 'desktop',
   input: desktop_in,
   output: '@BASENAME@',
-  command: intltool_desktop_cmd,
+  po_dir: po_dir,
   install: true,
   install_dir: gt_datadir / 'applications',
 )
 
 appdata = gt_iface_name + '.appdata.xml'
 
-custom_target(
+i18n.merge_file(
   appdata,
   input: appdata + '.in',
   output: '@BASENAME@',
-  command: intltool_xml_cmd,
+  po_dir: po_dir,
   install: true,
   install_dir: gt_datadir / 'metainfo',
 )

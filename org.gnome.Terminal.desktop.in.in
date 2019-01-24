@@ -1,10 +1,12 @@
 [Desktop Entry]
 # VERSION=@VERSION@
-_Name=Terminal
-_Comment=Use the command line
-_Keywords=shell;prompt;command;commandline;cmd;
+Name=Terminal
+Comment=Use the command line
+# Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+Keywords=shell;prompt;command;commandline;cmd;
 TryExec=gnome-terminal
 Exec=gnome-terminal
+# Translators: Do NOT translate or transliterate this text (this is an icon file name)!
 Icon=org.gnome.Terminal
 Type=Application
 Categories=GNOME;GTK;System;TerminalEmulator;
@@ -13,9 +15,9 @@ X-GNOME-SingleWindow=false
 Actions=new-window;preferences;
 
 [Desktop Action new-window]
-_Name=New Window
+Name=New Window
 Exec=gnome-terminal --window
 
 [Desktop Action preferences]
-_Name=Preferences
+Name=Preferences
 Exec=gnome-terminal --preferences
